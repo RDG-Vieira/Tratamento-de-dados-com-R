@@ -1,0 +1,166 @@
+---
+title: "Análise exploratória dos dados dos empregados da empresa Mils"
+subtitle: "2024"
+author: Rafael Vieira Guimarães
+  - name: Rafael Vieira Guimarães
+    email: EMAIL ALUNO
+    affiliation: 
+      - id: Faculdade SENAC DF
+        name: Faculdade SENAC DF
+date: last-modified
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    code-fold: show
+    code-summary: "Ocultar/mostrar"
+    code-copy: true
+    number-sections: false
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    toc-title: Sumário
+    title-block-banner: "#057bb4"
+    embed-resources: true
+    css: styles.css
+  pdf:
+    include-in-header: 
+      text: |
+execute:
+  warning: false
+  echo: false
+  eval: false
+  message: false
+editor: source
+editor_options: 
+  chunk_output_type: inline
+reference-location: margin
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Instalando e carregando os pacotes analíticos
+
+```{r}
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("readr")
+library(readr)
+install.packages("tibble")
+library(tibble)
+install.packages("knitr")
+library(knitr)
+tinytex::install_tinytex()
+library(tinytex)
+
+```
+
+
+## 2. Carregue o conjunto de dados Milsa e faça uma breve descrição sobre esses dados.
+
+```{r}
+library(readr)
+milsa <- read_csv("milsa.csv")
+View(milsa)
+
+```
+
+O conjunto de dados Milsa traz 8 características sobre uma amostra de 36 funcionários da empresa Milsa. Dentre essas características, destacamos: estado civil, grau de instrção, número de filhos, valor de salário etc.
+
+## 3. Verifique a estrutura dos dados e faça uma breve descrição dessa estrutura.
+
+```{r}
+
+
+```
+
+XXXXXXXXX
+
+### 3.1 Limpeza dos dados
+Nesta sub-seção, faremos a reposição dos dados faltantes (missing values ou NAs) na variável "Filhos".
+
+```{r}
+# Criando uma nova base de dados (milsa2) a partir da base de dados original (milsa)
+
+milsa2 <- milsa
+View(milsa2)
+
+# Substituindo os NAs da variável "Filhos" pela média de filhos (que é igual a 2)
+milsa2$Filhos[is.na(milsa2$Filhos)]<- median(milsa2$Filhos, na.rm=TRUE)
+
+# Arredondando os valores da variável "Filhos"
+milsa2$Filhos <- round(milsa2$Filhos, digits = 0)
+
+# Criando uma nova variável (Idade) a partir das variáveis "Anos" e "Meses"
+milsa2 <- transform(milsa2, idade = Anos + Meses/12)
+
+# Arredondando os valores da variável "Idade"
+milsa2$Idade <- round(milsa2$Idade , digits = 0)
+
+```
+
+## 4. Verifique a distribuição de frequência das variáveis (gráficos de histograma e de 
+boxplot) e elabore uma breve análise a partir de cada gráfico.
+
+```{r}
+# Gráficos da variável Salário
+
+grafico_hist <- hist(milsa$Salario, main = "Frequência dos salários da empresa Milsa", xlab = "salários",ylab = "Quantidade de Funcionários", col = c("blue", "pink", "yellow", "cyan", "grey", "red", "green", "violet", "black", "orange"), border = FALSE, xlim = c(0,25), ylim = c(0, 10), labels =TRUE )
+
+grafico_bloxplot <- boxplot(milsa2$Salario, main = "distribuição dos salários da empresa Milsa", ylab= "Salários", col= "lightblue")
+
+//*--
+  
+  
+  
+  
+  
+  --n b--''# Gráficos da variável Idade
+
+
+
+
+```
+
+## 5. Apresente as estatísticas descritivas (média, mediana, moda, quartis, desvio padrão e coeficientes de variação) dos atributos dos funcionários da companhia Milsa e  analise brevemente cada uma delas.
+```{r}
+grafico_hist <- hist(milsa2$Salario , main = "Frequência dos salários dos funcionários da empresa Milsa")
+# Análise da média das variáveis FILHO, IDADE e Salário
+
+
+# Análise da mediana das variáveis FILHO, IDADE e Salário
+
+
+# Análise da moda das variáveis FILHO, IDADE e Salário
+
+
+# Análise do desvio padrão das variáveis FILHO, IDADE e Salário
+
+
+
+# Análise do coeficiente de variacao das variáveis FILHO, IDADE e Salário
+
+```
+
+
+## 6. Construa as tabelas de contingência e de frequência das variáveis e faça uma breve análise sobre cada tabela.
+```{r}
+
+```
+
+
+## 7. Construa os gráficos de dispersão e de correlação das variáveis “Salário” e “Anos” e  analise brevemente cada gráfico.
+```{r}
+# Análise de correlação entre Salário e Filhos e entre Salário e Idade
+
+# Análise de dispersão entre Salário e Filhos e entre Salário e Idade
+
+
+
+```
+
+
+
+## 8. Elabore uma conclusão geral sobre o corpo de funcionários da companhia Milsa
+
